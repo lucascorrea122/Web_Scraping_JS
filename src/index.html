@@ -1,0 +1,51 @@
+hplogo
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Título da página</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    Aqui vai o código HTML que fará seu site aparecer.
+
+
+    <script type="text/javascript">
+       var cors_anywhere="http://cors-anywhere.herokuapp.com/";
+    //    var target = "https://www.google.com";
+       var target = "https://san.taleon.online/characterprofile.php?name=shooter+saint+souls";
+       var url = cors_anywhere+target;
+
+        fetch(url).then( response => response.text())
+                  .then(result => scraping(result, "text/html"))
+                  .catch(error=> console.error("error : "+ error))
+
+
+
+        function scraping(string_html, content_type){
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(string_html, content_type);
+            let table = doc.querySelector("#wrapper tbody");
+            let id = table.childElementCount;
+            // var wholetable = ("tr");
+            // console.log(table.length);
+            // img.src = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+            for(var i =0; i< id; i++){
+                var td = table.children[i];
+                document.body.appendChild(table);
+                console.log(td.children[1].textContent);
+            }
+            
+            document.body.appendChild(table);
+            console.log(id);
+            
+            
+            // src = img.getAttribute("src");
+            // img.src = target+img.getAttribute("src");
+            
+            
+            // console.log(img.src(src));
+        }
+
+    </script>
+  </body>
+</html>
